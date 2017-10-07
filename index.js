@@ -1,34 +1,50 @@
 const search = (ele) => {
   if(event.keyCode === 13) {
-    hills = []
-    buildPoints = []
+    hillCoordinates = []
+    buildCoordinates = []
     var inputValue = document.getElementById('input').value;
-    separator(inputValue);
+    stringSeparator(inputValue);
   }
 }
 
-const separator = (string) => {
+const stringSeparator = (string) => {
   var comma = ',';
   var stringArr = string.split(comma);
   stringArr.map((string, i) => {
-    hills.push(string);
+    hillCoordinates.push(parseInt(string));
   })
-  buildLocations(hills);
+  extractSequence(hillCoordinates)
 }
 
-const buildLocations = (coordinates) => {
+const extractSequence = (coordinates) => {
   coordinates.map((coordinate, i, array) => {
-    var hillPerameters = array[i-1] && array[i+1]
-    if(array[i] > hillPerameters || array[i] < hillPerameters) {
-      buildPoints.push(coordinate);
+    while(coordinate === array[i+1]) {
+      coordinates.splice(i, 1)
     }
   })
+  findBuildLocations(coordinates)
+}
 
+const findBuildLocations = (coordinates) => {
+  coordinates.map((coordinate, i, array) => {
+    prevPerameter = array[i-1];
+    currentPerameter = array[i];
+    nextPerameter = array[i+1];
+    if(currentPerameter > prevPerameter) {
+      if(currentPerameter > nextPerameter) {
+        buildCoordinates.push(currentPerameter)
+      }
+    } else if (currentPerameter < prevPerameter) {
+      if(currentPerameter < nextPerameter) {
+        buildCoordinates.push(currentPerameter)
+      }
+    }
+  })
   displayValue();
 }
 
 const displayValue = () => {
-  document.getElementById('points').innerHTML = buildPoints.join();
-  document.getElementById('amount').innerHTML = buildPoints.length;
+  document.getElementById('points').innerHTML = buildCoordinates.join();
+  document.getElementById('amount').innerHTML = buildCoordinates.length;
 }
 
