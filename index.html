@@ -13,7 +13,9 @@
       <img src="http://www.aequilibrium.ca/wp-content/themes/aeq-aeb/library/images/aeq_logo.svg" alt="logo">
       <h1>Aequilibrium Castle Building</h1>
       <p>Enter in your cordinates separated by commas</p>
-      <input id="input" type="text" onkeydown="search(this)">
+      <form onsubmit="return false">
+        <input id="input" type="text" onkeydown="search()" required>
+      </form>
     </div>
     <div class="output">
       <div class="resultContainer">

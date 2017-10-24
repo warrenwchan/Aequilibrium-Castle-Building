@@ -1,10 +1,8 @@
-const search = (ele) => {
-  if(event.keyCode === 13) {
-    hillCoordinates = []
-    buildCoordinates = []
-    var inputValue = document.getElementById('input').value;
-    stringSeparator(inputValue);
-  }
+const search = () => {
+  hillCoordinates = [];
+  buildCoordinates = [];
+  var inputValue = document.getElementById('input').value;
+  stringSeparator(inputValue);
 }
 
 const stringSeparator = (string) => {
@@ -13,16 +11,16 @@ const stringSeparator = (string) => {
   stringArr.map((string, i) => {
     hillCoordinates.push(parseInt(string));
   })
-  extractSequence(hillCoordinates)
+  extractSequence(hillCoordinates);
 }
 
 const extractSequence = (coordinates) => {
   coordinates.map((coordinate, i, array) => {
     while(coordinate === array[i+1]) {
-      coordinates.splice(i, 1)
+      coordinates.splice(i, 1);
     }
   })
-  findBuildLocations(coordinates)
+  findBuildLocations(coordinates);
 }
 
 const findBuildLocations = (coordinates) => {
